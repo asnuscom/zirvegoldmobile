@@ -24,8 +24,15 @@ const Home = ({navigation}) => {
           <Text>Profil</Text>
         </TouchableOpacity>
       </View>
-      <ScrollView>
-        <OrderCard title='İhsan Sunman' content='22 Gold'/>
+      <ScrollView style={styles.orders}>
+        <OrderCard title='İhsan Sunman' content='22' color='Rose Gold' status={true}/>
+        <OrderCard title='Samet Sunman' content='22' color='Gold' status={false}/>
+        <OrderCard title='Yavuz Selim Şahin' content='22' color='Silver' status={true}/>
+        <OrderCard title='Samet Sunman' content='22' color='Rose Gold' status={false}/>
+        <OrderCard title='İhsan Sunman' content='22' color='Gold' status={true}/>
+        <OrderCard title='Samet Sunman' content='22' color='Rose Gold' status={true}/>
+        <OrderCard title='İhsan Sunman' content='22' color='Rose Gold' status={false}/>
+        <OrderCard title='Samet Sunman' content='22' color='Gold' status={true}/>
       </ScrollView>
     </View>
   );
@@ -51,6 +58,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFD700',
     padding: 10,
     borderRadius: 10,
+  },
+  orders: {
+    flex: 1,
+    padding: 20,
   },
 });
 
