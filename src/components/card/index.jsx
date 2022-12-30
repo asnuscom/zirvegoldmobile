@@ -15,7 +15,7 @@ const OrderCard = ({title, content, color, status}) => {
         {status ? (
           <Text style={styles.complate}>Tamamlandı</Text>
         ) : (
-          <Text style={styles.notcomplate}>Tamamlandı</Text>
+          <Text style={styles.notcomplate}>Tamamlanmadı</Text>
         )}
       </View>
     </View>
