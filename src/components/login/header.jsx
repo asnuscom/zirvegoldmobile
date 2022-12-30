@@ -28,6 +28,7 @@ const Header = () => {
 
 const styles = StyleSheet.create({
   sectionContainer: {
+    backgroundColor: 'white',
     marginTop: 84,
     marginBottom: 32,
     paddingHorizontal: 24,

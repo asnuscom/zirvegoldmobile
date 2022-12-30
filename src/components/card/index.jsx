@@ -1,8 +1,9 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 
-const OrderCard = ({title, content, color, status}) => {
+const OrderCard = ({navigation, title, content, color, status}) => {
   return (
+    <TouchableOpacity onPress={() => navigation.navigate('orderDetail', {id: title})}>
     <View style={styles.cardContainer}>
       <Image
         style={styles.cardImage}
@@ -10,8 +11,8 @@ const OrderCard = ({title, content, color, status}) => {
       />
       <View style={styles.cardContent}>
         <Text style={styles.title}>{title}</Text>
-        <Text>{content} Ayar</Text>
-        <Text>{color}</Text>
+        <Text style={styles.text}>{content} Ayar</Text>
+        <Text style={styles.text}>{color}</Text>
         {status ? (
           <Text style={styles.complate}>Tamamlandı</Text>
         ) : (
@@ -19,6 +20,7 @@ const OrderCard = ({title, content, color, status}) => {
         )}
       </View>
     </View>
+    </TouchableOpacity>
   );
 };
 
@@ -41,6 +43,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
+    color: '#333',
+  },
+  text: {
+    color: '#666',
   },
   complate: {
     color: 'green',

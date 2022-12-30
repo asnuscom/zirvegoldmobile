@@ -7,6 +7,7 @@ import Login from './src/pages/login';
 import Profile from './src/pages/profile';
 import Customers from './src/pages/customers';
 import NewOrder from './src/pages/newOrder';
+import OrderDetail from './src/pages/orderDetail';
 
 const Stack = createStackNavigator();
 
@@ -16,7 +17,7 @@ const App = () => {
       <Stack.Navigator>
         <Stack.Screen
           name="login"
-          options={{title: 'Zirve Gold Döküm'}}
+          options={{title: false}}
           component={Login}
         />
         <Stack.Screen
@@ -41,6 +42,11 @@ const App = () => {
             name="newOrder"
             options={{title: 'Yeni Sipariş'}}
             component={NewOrder}
+          />
+          <Stack.Screen
+            name="orderDetail"
+            options={{title: 'Sipariş Detayı'}}
+            component={OrderDetail}
           />
         </Stack.Group>
       </Stack.Navigator>

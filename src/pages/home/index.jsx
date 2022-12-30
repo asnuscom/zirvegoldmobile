@@ -6,33 +6,81 @@ import OrderCard from '../../components/card';
 const Home = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.landing}>Hoşgeldiniz!</Text>
       <View style={styles.navbar}>
         <TouchableOpacity
           style={styles.navButton}
           onPress={() => navigation.navigate('newOrder')}>
-          <Text>Yeni Sipariş</Text>
+          <Text style={styles.text}>Yeni Sipariş</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.navButton}
           onPress={() => navigation.navigate('customers')}>
-          <Text>Müşteriler</Text>
+          <Text style={styles.text}>Müşteriler</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.navButton}
           onPress={() => navigation.navigate('profile')}>
-          <Text>Profil</Text>
+          <Text style={styles.text}>Profil</Text>
         </TouchableOpacity>
       </View>
+      <Text style={styles.landing}>Hoşgeldiniz!</Text>
       <ScrollView style={styles.orders}>
-        <OrderCard title='İhsan Sunman' content='22' color='Rose Gold' status={true}/>
-        <OrderCard title='Samet Sunman' content='22' color='Gold' status={false}/>
-        <OrderCard title='Yavuz Selim Şahin' content='22' color='Silver' status={true}/>
-        <OrderCard title='Samet Sunman' content='22' color='Rose Gold' status={false}/>
-        <OrderCard title='İhsan Sunman' content='22' color='Gold' status={true}/>
-        <OrderCard title='Samet Sunman' content='22' color='Rose Gold' status={true}/>
-        <OrderCard title='İhsan Sunman' content='22' color='Rose Gold' status={false}/>
-        <OrderCard title='Samet Sunman' content='22' color='Gold' status={true}/>
+        <OrderCard
+          navigation={navigation}
+          title="İhsan Sunman"
+          content="22"
+          color="Rose Gold"
+          status={true}
+        />
+        <OrderCard
+          navigation={navigation}
+          title="Samet Sunman"
+          content="22"
+          color="Gold"
+          status={false}
+        />
+        <OrderCard
+          navigation={navigation}
+          title="Yavuz Selim Şahin"
+          content="22"
+          color="Silver"
+          status={true}
+        />
+        <OrderCard
+          navigation={navigation}
+          title="Samet Sunman"
+          content="22"
+          color="Rose Gold"
+          status={false}
+        />
+        <OrderCard
+          navigation={navigation}
+          title="İhsan Sunman"
+          content="22"
+          color="Gold"
+          status={true}
+        />
+        <OrderCard
+          navigation={navigation}
+          title="Samet Sunman"
+          content="22"
+          color="Rose Gold"
+          status={true}
+        />
+        <OrderCard
+          navigation={navigation}
+          title="İhsan Sunman"
+          content="22"
+          color="Rose Gold"
+          status={false}
+        />
+        <OrderCard
+          navigation={navigation}
+          title="Samet Sunman"
+          content="22"
+          color="Gold"
+          status={true}
+        />
       </ScrollView>
     </View>
   );
@@ -42,26 +90,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  text: {
+    color: '#333',
+  },
   landing: {
-    fontSize: 30,
+    fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 15,
+    marginBottom: 10,
+    color: '#333',
   },
   navbar: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginBottom: 20,
+    marginTop: 20,
   },
   navButton: {
-    backgroundColor: '#FFD700',
     padding: 10,
-    borderRadius: 10,
+    borderBottomColor: '#FFD700',
+    borderBottomWidth: 2,
   },
   orders: {
     flex: 1,
-    padding: 20,
+    margin: 10,
+    padding: 10,
   },
 });
 
