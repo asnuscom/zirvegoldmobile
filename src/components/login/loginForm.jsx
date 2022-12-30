@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, TextInput, View, TouchableOpacity, StyleSheet} from 'react-native';
 
-const LoginForm = () => {
+const LoginForm = ({navigation}) => {
   return (
     <View style={[styles.container, {backgroundColor: 'white'}]}>
       <TextInput
@@ -16,7 +16,7 @@ const LoginForm = () => {
       />
 
       <TouchableOpacity style={styles.loginBtn}>
-        <Text style={styles.loginText}>LOGIN</Text>
+        <Text style={styles.loginText} onPress={() => navigation.navigate('Zirve Gold Döküm')}>Giriş Yap</Text>
       </TouchableOpacity>
     </View>
   );

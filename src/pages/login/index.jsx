@@ -3,11 +3,11 @@ import { ScrollView } from "react-native";
 import Header from "../../components/login/header";
 import LoginForm from "../../components/login/loginForm";
 
-const Login = () => {
+const Login = ({navigation}) => {
     return (
         <ScrollView>
             <Header />
-            <LoginForm />
+            <LoginForm navigation={navigation}/>
         </ScrollView>
     )
 }
