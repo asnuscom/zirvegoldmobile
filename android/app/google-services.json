@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "849655230552",
+    "project_id": "zirve-gold",
+    "storage_bucket": "zirve-gold.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849655230552:android:6a8505837aa521b1cd1a2d",
+        "android_client_info": {
+          "package_name": "com.zirvegoldmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "849655230552-m88stgpe4slu85sq89psvqgsq9jpuqtp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqzAxuIZ0jmtQnK67AleNrbuHUDMICXkk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "849655230552-m88stgpe4slu85sq89psvqgsq9jpuqtp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

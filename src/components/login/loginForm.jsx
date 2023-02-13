@@ -16,6 +16,33 @@ const LoginForm = ({navigation}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  
+  const getCurrentUser = async userId => {
+    const customer = await getCustomerById(userId);
+    // setUser({...user, ...customer})
+  };
+  
+  const storeUser = async (value) => {
+    try {
+      console.log("storeUser: ",value);
+      await AsyncStorage.setItem('user', JSON.stringify(value));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  const getUser = async () => {
+    try {
+      const savedUser = await AsyncStorage.getItem('user');
+      const currentUser = savedUser;
+      console.log("currentUser: ",currentUser);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  getUser();
+  
   const handleLogin = e => {
     console.log('handleLogin');
     // e.preventDefault();
@@ -23,7 +50,8 @@ const LoginForm = ({navigation}) => {
     signInWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
         const user = userCredential.user;
-        console.log(user)
+        // console.log(user)
+        storeUser(user);
         // getCurrentUser(user.uid);
         // localStorage.setItem('token', user.accessToken);
         // localStorage.setItem('userId', user.uid);
@@ -35,46 +63,19 @@ const LoginForm = ({navigation}) => {
         // setError(true);
       });
   };
-
-  const getCurrentUser = async userId => {
-    const customer = await getCustomerById(userId);
-    // setUser({...user, ...customer})
-  };
-
-  const storeUser = async value => {
-    try {
-      await AsyncStorage.setItem('user', value);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  storeUser('user1');
-
-  const getUser = async () => {
-    try {
-      const savedUser = await AsyncStorage.getItem('user');
-      const currentUser = savedUser;
-      console.log(currentUser);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  getUser();
-
   return (
     <View style={[styles.container, {backgroundColor: 'white'}]}>
       <TextInput
         style={styles.inputText}
         placeholder="Email"
         placeholderTextColor="black"
-        onChange={e=>setEmail(e.target.value)}
+        onChangeText={e=>setEmail(e)}
       />
       <TextInput
         style={styles.inputText}
         placeholder="Parola"
         placeholderTextColor="black"
-        onChange={e=>setPassword(e.target.value)}
+        onChangeText={e=>setPassword(e)}
       />
 
       <TouchableOpacity style={styles.loginBtn} onPress={() => handleLogin()}>
