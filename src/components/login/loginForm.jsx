@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   TextInput,
@@ -13,54 +13,37 @@ import {getCustomerById} from './../../firebase/customerApi';
 
 const LoginForm = ({navigation}) => {
   // const [error, setError] = useState(false);
+  const [customer, setCustomer] = useState({});
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const token = await AsyncStorage.getItem('token');
+        token && navigation.navigate('home');
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getUser();
+  }, []);
   
-  const getCurrentUser = async userId => {
-    const customer = await getCustomerById(userId);
-    // setUser({...user, ...customer})
-  };
-  
-  const storeUser = async (value) => {
-    try {
-      console.log("storeUser: ",value);
-      await AsyncStorage.setItem('user', JSON.stringify(value));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  
-  const getUser = async () => {
-    try {
-      const savedUser = await AsyncStorage.getItem('user');
-      const currentUser = savedUser;
-      console.log("currentUser: ",currentUser);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  
-  getUser();
-  
-  const handleLogin = e => {
+  const handleLogin = () => {
     console.log('handleLogin');
-    // e.preventDefault();
 
     signInWithEmailAndPassword(auth, email, password)
-      .then(userCredential => {
+      .then( async userCredential => {
         const user = userCredential.user;
-        // console.log(user)
-        storeUser(user);
-        // getCurrentUser(user.uid);
-        // localStorage.setItem('token', user.accessToken);
-        // localStorage.setItem('userId', user.uid);
-        // setUser(user);
-        // navigation.navigate('home')
+        console.log("user: ",user);
+        await AsyncStorage.setItem('token', user.stsTokenManager.accessToken);
+        await AsyncStorage.setItem('userId', user.uid);
+        const customer = await getCustomerById(user.uid);
+        await AsyncStorage.setItem('userRole', customer.role);
+        customer && navigation.navigate('home');
       })
       .catch(error => {
         console.log(error);
-        // setError(true);
       });
   };
   return (
@@ -75,6 +58,7 @@ const LoginForm = ({navigation}) => {
         style={styles.inputText}
         placeholder="Parola"
         placeholderTextColor="black"
+        secureTextEntry={true}
         onChangeText={e=>setPassword(e)}
       />
 

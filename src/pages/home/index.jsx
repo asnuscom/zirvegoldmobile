@@ -1,9 +1,31 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import OrderCard from '../../components/card';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {getList, getListByCustomerId} from '../../firebase/orderApi';
 
 const Home = ({navigation}) => {
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  const getProducts = async () => {
+    try {
+      const userId = await AsyncStorage.getItem('userId');
+      const userRole = await AsyncStorage.getItem('userRole');
+      console.log('userId: ', userId);
+      console.log('userRole: ', userRole);
+      const list =
+        userRole === 'admin'
+          ? await getList()
+          : await getListByCustomerId(userId);
+      console.log('list: ', list);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.navbar}>
@@ -89,6 +111,7 @@ const Home = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // backgroundColor: '#121212',
   },
   text: {
     color: '#333',
