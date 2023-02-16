@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from 'react-native';
+import {StatusBar, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Home from './src/pages/home';
@@ -14,10 +14,13 @@ const Stack = createStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <StatusBar backgroundColor="#000"/>
+      <Stack.Navigator
+      screenOptions={{ headerStyle: styles.navigation, headerTintColor: '#fff' }}
+      >
         <Stack.Screen
           name="login"
-          options={{title: false}}
+          options={{title: false, headerStyle: { backgroundColor: 'white' }}}
           component={Login}
         />
         <Stack.Screen
@@ -28,7 +31,7 @@ const App = () => {
           component={Home}
         />
         <Stack.Group screenOptions={{presentation: 'modal'}}>
-          <Stack.Screen
+          {/* <Stack.Screen
             name="profile"
             options={{title: 'Hesabım'}}
             component={Profile}
@@ -42,7 +45,7 @@ const App = () => {
             name="newOrder"
             options={{title: 'Yeni Sipariş'}}
             component={NewOrder}
-          />
+          /> */}
           <Stack.Screen
             name="orderDetail"
             options={{title: 'Sipariş Detayı'}}
@@ -53,5 +56,11 @@ const App = () => {
     </NavigationContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  navigation: {
+    backgroundColor: '#212529',
+  }
+});
 
 export default App;

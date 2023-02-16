@@ -1,11 +1,35 @@
-import React, {useEffect} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, Button, StyleSheet} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import {ScrollView} from 'react-native-gesture-handler';
 import OrderCard from '../../components/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {getList, getListByCustomerId} from '../../firebase/orderApi';
 
-const Home = ({navigation}) => {
+const Home = () => {
+  const [orders, setOrders] = useState([]);
+  const navigation = useNavigation();
+
+  const handleLogout = async () => {
+      await AsyncStorage.removeItem('token');
+      await AsyncStorage.removeItem('userId');
+      await AsyncStorage.removeItem('userRole');
+      navigation.navigate('login');
+  };
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: null,
+      headerRight: () => (
+        <Button
+          onPress={handleLogout}
+          title="Çıkış Yap"
+          color="#212529"
+        />
+      ),
+    });
+  }, [navigation, handleLogout]);
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -20,7 +44,7 @@ const Home = ({navigation}) => {
         userRole === 'admin'
           ? await getList()
           : await getListByCustomerId(userId);
-      console.log('list: ', list);
+      setOrders(list);
     } catch (error) {
       console.log(error);
     }
@@ -28,7 +52,7 @@ const Home = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.navbar}>
+      {/* <View style={styles.navbar}>
         <TouchableOpacity
           style={styles.navButton}
           onPress={() => navigation.navigate('newOrder')}>
@@ -44,65 +68,22 @@ const Home = ({navigation}) => {
           onPress={() => navigation.navigate('profile')}>
           <Text style={styles.text}>Profil</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
       <Text style={styles.landing}>Hoşgeldiniz!</Text>
       <ScrollView style={styles.orders}>
-        <OrderCard
-          navigation={navigation}
-          title="İhsan Sunman"
-          content="22"
-          color="Rose Gold"
-          status={true}
-        />
-        <OrderCard
-          navigation={navigation}
-          title="Samet Sunman"
-          content="22"
-          color="Gold"
-          status={false}
-        />
-        <OrderCard
-          navigation={navigation}
-          title="Yavuz Selim Şahin"
-          content="22"
-          color="Silver"
-          status={true}
-        />
-        <OrderCard
-          navigation={navigation}
-          title="Samet Sunman"
-          content="22"
-          color="Rose Gold"
-          status={false}
-        />
-        <OrderCard
-          navigation={navigation}
-          title="İhsan Sunman"
-          content="22"
-          color="Gold"
-          status={true}
-        />
-        <OrderCard
-          navigation={navigation}
-          title="Samet Sunman"
-          content="22"
-          color="Rose Gold"
-          status={true}
-        />
-        <OrderCard
-          navigation={navigation}
-          title="İhsan Sunman"
-          content="22"
-          color="Rose Gold"
-          status={false}
-        />
-        <OrderCard
-          navigation={navigation}
-          title="Samet Sunman"
-          content="22"
-          color="Gold"
-          status={true}
-        />
+        {orders?.map((order, index) => (
+          <OrderCard
+            key={index}
+            navigation={navigation}
+            title={order.customerName}
+            image={order.image}
+            content={order.content}
+            color={order.color}
+            date={order.date}
+            status={order.state}
+          />
+        ))
+        }
       </ScrollView>
     </View>
   );
@@ -111,7 +92,7 @@ const Home = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#121212',
+    backgroundColor: '#F5F5F6',
   },
   text: {
     color: '#333',
