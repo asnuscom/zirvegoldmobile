@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "849655230552",
-    "project_id": "zirve-gold",
-    "storage_bucket": "zirve-gold.appspot.com"
+    "project_number": "344471242957",
+    "project_id": "maas-first-app",
+    "storage_bucket": "maas-first-app.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:849655230552:android:6a8505837aa521b1cd1a2d",
+        "mobilesdk_app_id": "1:344471242957:android:04f5bb78e206e055600184",
         "android_client_info": {
-          "package_name": "com.zirvegoldmobile"
+          "package_name": "com.company.maasfirstapp"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "849655230552-m88stgpe4slu85sq89psvqgsq9jpuqtp.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCqzAxuIZ0jmtQnK67AleNrbuHUDMICXkk"
+          "current_key": "AIzaSyB2kjur2asZgDhAZOQKNT5UrNH8tdvm0U8"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "849655230552-m88stgpe4slu85sq89psvqgsq9jpuqtp.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
